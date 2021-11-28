@@ -81,12 +81,10 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-*Hello {} !*
-────────────────────────
-✪ I'm an anime theme bot designed to help manage your telegram group with a lot features.
-✪ Maintained by @skyzu ✨
-────────────────────────
-Hit the /help to see available command.
+BORZ поможет модерировать ваши чаты!
+Добавьте бота в ваш чат и выдайте права администратора.
+Нажмите /help, чтобы увидеть доступные команды.
+ [⚜️](https://telegra.ph/file/cab6825dea9263d347831.jpg)
 """
 
 buttons = [
@@ -99,17 +97,14 @@ buttons = [
             text="ᴛʀʏ ɪɴʟɪɴᴇ​", switch_inline_query_current_chat=""
         ),
     ],
-    [
-        InlineKeyboardButton(
-            text="sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ​", url="https://github.com/Skyzu/SkyzuRobot"
-        ),
+
         InlineKeyboardButton(
             text="sᴜᴘᴘᴏʀᴛ​", url=f"https://t.me/{SUPPORT_CHAT}"
         ),
     ],
     [
         InlineKeyboardButton(
-            text="➗ ᴀᴅᴅ sᴋʏᴢᴜ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ​ ➗", url="t.me/SkyzuRobot?startgroup=new"),
+            text="➗ ᴀᴅᴅ sᴋʏᴢᴜ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ​ ➗", url="t.me/islam95_bot?startgroup=new"),
     ],
 ]
 
