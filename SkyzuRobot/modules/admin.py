@@ -33,7 +33,7 @@ def set_sticker(update: Update, context: CallbackContext):
     user = update.effective_user
 
     if user_can_changeinfo(chat, user, context.bot.id) is False:
-        return msg.reply_text("У вас отсутствуют права на изменение информации в чате!")
+        return msg.reply_text("У вас нет прав на изменение информации в чате!")
 
     if msg.reply_to_message:
         if not msg.reply_to_message.sticker:
@@ -43,7 +43,7 @@ def set_sticker(update: Update, context: CallbackContext):
         stkr = msg.reply_to_message.sticker.set_name
         try:
             context.bot.set_chat_sticker_set(chat.id, stkr)
-            msg.reply_text(f"Успешно установить новые групповые стикеры в {chat.title}!")
+            msg.reply_text(f"Successfully set new group stickers in {chat.title}!")
         except BadRequest as excp:
             if excp.message == "Participants_too_few":
                 return msg.reply_text(
@@ -114,7 +114,7 @@ def set_desc(update: Update, context: CallbackContext):
     user = update.effective_user
 
     if user_can_changeinfo(chat, user, context.bot.id) is False:
-        return msg.reply_text("You're missing rights to change chat info!")
+        return msg.reply_text("У вас нет прав на изменение информации в чате!")
 
     tesc = msg.text.split(None, 1)
     if len(tesc) >= 2:
@@ -176,7 +176,7 @@ def promote(update: Update, context: CallbackContext) -> str:
         not (promoter.can_promote_members or promoter.status == "creator")
         and user.id not in DRAGONS
     ):
-        message.reply_text("You don't have the necessary rights to do that!")
+        message.reply_text("")
         return
 
     user_id = extract_user(message, args)
@@ -193,11 +193,11 @@ def promote(update: Update, context: CallbackContext) -> str:
         return
 
     if user_member.status in ('administrator', 'creator'):
-        message.reply_text("How am I meant to promote someone that's already an admin?")
+        message.reply_text("Как мне повышать кого-то, кто уже является администратором?")
         return
 
     if user_id == bot.id:
-        message.reply_text("I can't promote myself! Get an admin to do it for me.")
+        message.reply_text("Я не могу повышать!  Попросите администратора сделать это за меня.")
         return
 
     # set same perms as bot - bot can't assign higher perms than itself!
@@ -218,9 +218,9 @@ def promote(update: Update, context: CallbackContext) -> str:
         )
     except BadRequest as err:
         if err.message == "User_not_mutual_contact":
-            message.reply_text("I can't promote someone who isn't in the group.")
+            message.reply_text("Я не могу повышать кого-то, кто не в группе.")
         else:
-            message.reply_text("An error occured while promoting.")
+            message.reply_text("Произошла ошибка при повышение.")
         return
 
     bot.sendMessage(
@@ -258,7 +258,7 @@ def lowpromote(update: Update, context: CallbackContext) -> str:
         not (promoter.can_promote_members or promoter.status == "creator")
         and user.id not in DRAGONS
     ):
-        message.reply_text("You don't have the necessary rights to do that!")
+        message.reply_text("У вас нет на это необходимых прав!")
         return
 
     user_id = extract_user(message, args)
@@ -275,11 +275,11 @@ def lowpromote(update: Update, context: CallbackContext) -> str:
         return
 
     if user_member.status in ('administrator', 'creator'):
-        message.reply_text("How am I meant to promote someone that's already an admin?")
+        message.reply_text("Как мне повышать кого-то, кто уже является администратором?")
         return
 
     if user_id == bot.id:
-        message.reply_text("I can't promote myself! Get an admin to do it for me.")
+        message.reply_text("Я не могу повышать!  Попросите администратора сделать это за меня.")
         return
 
     # set same perms as bot - bot can't assign higher perms than itself!
@@ -295,9 +295,9 @@ def lowpromote(update: Update, context: CallbackContext) -> str:
         )
     except BadRequest as err:
         if err.message == "User_not_mutual_contact":
-            message.reply_text("I can't promote someone who isn't in the group.")
+            message.reply_text("")
         else:
-            message.reply_text("An error occured while promoting.")
+            message.reply_text("Произошла ошибка при повышение.")
         return
 
     bot.sendMessage(
@@ -335,7 +335,7 @@ def fullpromote(update: Update, context: CallbackContext) -> str:
         not (promoter.can_promote_members or promoter.status == "creator")
         and user.id not in DRAGONS
     ):
-        message.reply_text("You don't have the necessary rights to do that!")
+        message.reply_text("У вас нет на это необходимых прав!")
         return
 
     user_id = extract_user(message, args)
@@ -352,11 +352,11 @@ def fullpromote(update: Update, context: CallbackContext) -> str:
         return
 
     if user_member.status in ('administrator', 'creator'):
-        message.reply_text("How am I meant to promote someone that's already an admin?")
+        message.reply_text("Как мне повышать кого-то, кто уже является администратором?")
         return
 
     if user_id == bot.id:
-        message.reply_text("I can't promote myself! Get an admin to do it for me.")
+        message.reply_text("")
         return
 
     # set same perms as bot - bot can't assign higher perms than itself!
@@ -378,9 +378,9 @@ def fullpromote(update: Update, context: CallbackContext) -> str:
         )
     except BadRequest as err:
         if err.message == "User_not_mutual_contact":
-            message.reply_text("I can't promote someone who isn't in the group.")
+            message.reply_text("Я не могу повышать кого-то, кто не в группе.")
         else:
-            message.reply_text("An error occured while promoting.")
+            message.reply_text("Произошла ошибка при повышение.")
         return
 
     keyboard = InlineKeyboardMarkup([[
@@ -635,7 +635,7 @@ def unpin(update: Update, context: CallbackContext):
         not (unpinner.can_pin_messages or unpinner.status == "creator")
         and user.id not in DRAGONS
     ):
-        message.reply_text("You don't have the necessary rights to do that!")
+        message.reply_text("У вас нет на это необходимых прав!")
         return
 
     if msg.chat.username:
@@ -921,8 +921,8 @@ def button(update: Update, context: CallbackContext) -> str:
   
 __help__ = """
 *User Commands*:
-❂ /admins*:* list of admins in the chat
-❂ /pinned*:* to get the current pinned message.
+❂ /admins*:* список админов в чате
+❂ /pinned*:* .
 
 *The Following Commands are Admins only:* 
 ❂ /pin*:* silently pins the message replied to - add `'loud'` or `'notify'` to give notifs to users
